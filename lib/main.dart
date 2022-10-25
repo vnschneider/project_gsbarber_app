@@ -1,4 +1,4 @@
-//comentario inutil
+//comentarii irrisorio 2
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'ui/login&register/loginPage.dart';
