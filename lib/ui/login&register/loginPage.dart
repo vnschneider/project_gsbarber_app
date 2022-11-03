@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +16,24 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   TapGestureRecognizer registerOnTap = TapGestureRecognizer();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
+  Future<void> signInEmail() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+  }
 
   @override
   void initState() {
@@ -34,8 +52,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onBackground,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        //surfaceTintColor: Colors.black,
+        //notificationPredicate: defaultScrollNotificationPredicate,
+        //scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white),
         elevation: 0.0,
@@ -55,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
-                    SizedBox(height: 12),
+                    //SizedBox(height: 2),
                     Row(
                       children: [
                         Text(
@@ -67,15 +89,61 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                    AppTextField(
+                    SizedBox(height: 2),
+                    TextFormField(
+                      controller: emailController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Insira um email válido';
+                        }
+                        return null;
+                      },
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        hintText: 'E-mail',
+                        prefixIcon: const Icon(Icons.email),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    /*AppTextField(
                       hint: "Email",
                       icon: Icons.email,
                       keyType: TextInputType.emailAddress,
                       helpOnTap: () {},
                       helpContent: Text(" "),
-                    ),
+                    ),*/
                     SizedBox(height: 12),
-                    AppTextField(
+                    TextFormField(
+                      controller: passwordController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Insira sua senha';
+                        } else if (value.length < 6) {
+                          return 'sua senha deve conter pelo menos 6 caracteres!';
+                        }
+                        return null;
+                      },
+                      maxLines: 1,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              //showpassword = false;
+                            });
+                          },
+                          icon: const Icon(Icons.remove_red_eye_outlined),
+                        ),
+                        hintText: 'Senha',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    /*AppTextField(
                       hint: "Senha",
                       icon: Icons.lock,
                       keyType: TextInputType.visiblePassword,
@@ -85,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                             TextStyle(fontSize: 16, color: Colors.indigo[900]),
                       ),
                       helpOnTap: () {},
-                    ),
+                    ),*/
                     SizedBox(height: 12),
                     Row(
                       children: [
@@ -108,12 +176,20 @@ class _LoginPageState extends State<LoginPage> {
                               style:
                                   TextStyle(color: Colors.white, fontSize: 16),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => HomePage()));
                             },
+                            /*onPressed: () {
+                              AuthProviderService.instance.isLoading == true
+                                  ? AuthProviderService.instance.loading()
+                                  : Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => HomePage()));
+                            },*/
                           ),
                         ),
                       ],
@@ -124,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.black38),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: 12),
                     Row(
                       children: [
                         Expanded(
@@ -132,6 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                             asset: "assets/googleicon.png",
                             onTap: () async {
                               await AuthProviderService.instance.signIn();
+                              AuthProviderService.instance.loading();
                               if (AuthProviderService.instance.user != null) {
                                 Navigator.push(
                                     context,

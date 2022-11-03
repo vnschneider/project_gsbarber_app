@@ -14,6 +14,7 @@ class _BarberShopPageState extends State<BarberShopPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //appBar: AppBar(),
       body: ListView(
         children: <Widget>[
           Padding(

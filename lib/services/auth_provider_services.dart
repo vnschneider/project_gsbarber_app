@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthProviderService {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isLoading = true;
   AuthProviderService._();
 
   static AuthProviderService instance = AuthProviderService._();
@@ -19,6 +21,7 @@ class AuthProviderService {
     );
 
     await _auth.signInWithCredential(authCredential);
+    isLoading = false;
   }
 
   Future<void> signOut() async {
@@ -27,7 +30,16 @@ class AuthProviderService {
     }
     await GoogleSignIn().disconnect();
     await GoogleSignIn().signOut();
+    isLoading = false;
   }
 
   User? get user => _auth.currentUser;
+
+  loading() {
+    const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 }
