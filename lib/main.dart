@@ -15,7 +15,7 @@ void main() async {
 
   ColorScheme defaultColorScheme = const ColorScheme(
     primary: Color.fromARGB(255, 26, 35, 126),
-    secondary: Color.fromARGB(150, 68, 3, 129),
+    secondary: Color.fromARGB(255, 26, 35, 126),
     surface: Color(0xff181818),
     background: Color.fromARGB(255, 255, 255, 255),
     error: Color.fromARGB(255, 242, 100, 48),

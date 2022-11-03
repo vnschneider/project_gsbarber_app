@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/product_model.dart';
 import '../models/services_model.dart';
@@ -10,10 +11,30 @@ class BarberShopPage extends StatefulWidget {
 class _BarberShopPageState extends State<BarberShopPage> {
   List<ServiceModel> serviceList = ServiceModel.list;
   List<ProductModel> productList = ProductModel.list;
+  bool FBExtended = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        isExtended: FBExtended,
+        label: Text(
+          "R\$ 35,80",
+          style: TextStyle(
+            color: Colors.indigo[900],
+            fontSize: 20,
+          ),
+          selectionColor: Colors.indigo[900],
+        ),
+        elevation: 8,
+        backgroundColor: Colors.white,
+        icon: const Icon(
+          CupertinoIcons.cart,
+          color: Color.fromRGBO(26, 35, 126, 1),
+          size: 35,
+        ),
+        onPressed: () {},
+      ),
       //appBar: AppBar(),
       body: ListView(
         children: <Widget>[
@@ -39,7 +60,10 @@ class _BarberShopPageState extends State<BarberShopPage> {
                         Icons.search,
                         size: 30,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        FBExtended = true;
+                        setState(() {});
+                      },
                     ),
                   ],
                 ),
