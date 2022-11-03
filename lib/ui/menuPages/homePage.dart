@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     NewsPaperPage(),
     BarberShopPage(),
     BarbersPage(),
-    //ProfilePage(),
+    ProfilePage(),
   ];
 
   @override
