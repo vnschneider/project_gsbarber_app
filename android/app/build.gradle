@@ -52,10 +52,6 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-    
-    lintOptions { 
-         disable 'InvalidPackage' 
-     } 
 
     buildTypes {
         release {

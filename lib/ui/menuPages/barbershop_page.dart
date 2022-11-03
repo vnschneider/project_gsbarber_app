@@ -32,8 +32,12 @@ class _BarberShopPageState extends State<BarberShopPage> {
                         fontSize: 30.0,
                       ),
                     ),
+                    SizedBox(width: 10),
                     IconButton(
-                      icon: Icon(Icons.search),
+                      icon: Icon(
+                        Icons.search,
+                        size: 30,
+                      ),
                       onPressed: () {},
                     ),
                   ],
