@@ -57,7 +57,7 @@ class _BarberShopPageState extends State<BarberShopPage> {
                     SizedBox(width: 10),
                     IconButton(
                       icon: Icon(
-                        Icons.search,
+                        CupertinoIcons.search,
                         size: 30,
                       ),
                       onPressed: () {
