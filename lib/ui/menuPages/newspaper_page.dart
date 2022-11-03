@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../services/auth_provider_services.dart';
 
 class NewsPaperPage extends StatefulWidget {

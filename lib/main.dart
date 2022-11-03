@@ -1,5 +1,7 @@
-//comentarii irrisorio 2
+//comentario irrisorio 2
 import 'package:firebase_core/firebase_core.dart';
+import 'package:project_gsbarber_app/services/auth_provider_services.dart';
+import 'package:project_gsbarber_app/ui/menuPages/homePage.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -17,7 +19,7 @@ void main() async {
       primaryColor: Colors.indigo[900],
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    home: LoginPage(),
+    home: AuthProviderService.instance.user != null ? HomePage() : LoginPage(),
     debugShowCheckedModeBanner: false,
     builder: EasyLoading.init(),
   ));
