@@ -54,7 +54,7 @@ class _BarbersPageState extends State<BarbersPage> {
                       )
                     ]),
                 child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       width: 70,
@@ -73,7 +73,7 @@ class _BarbersPageState extends State<BarbersPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          //mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               "${data.name}",
@@ -82,7 +82,6 @@ class _BarbersPageState extends State<BarbersPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            //Expanded(child: Text("")),
                             GestureDetector(
                               onTap: () {},
                               child: Icon(
