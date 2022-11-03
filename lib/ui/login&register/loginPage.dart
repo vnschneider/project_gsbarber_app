@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import '../../services/auth_provider_services.dart';
 import '../menuPages/homePage.dart';
 import '../widgets/app_outlinedbutton.dart';
 import '../widgets/app_textfield.dart';
@@ -12,7 +14,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  //final GoogleSignIn googleSignIn = GoogleSignIn();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
   TapGestureRecognizer registerOnTap = TapGestureRecognizer();
 
   @override
@@ -128,7 +130,15 @@ class _LoginPageState extends State<LoginPage> {
                         Expanded(
                           child: AppOutlinedButton(
                             asset: "assets/googleicon.png",
-                            onTap: () {},
+                            onTap: () async {
+                              await AuthProviderService.instance.signIn();
+                              if (AuthProviderService.instance.user != null) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => HomePage()));
+                              }
+                            },
                           ),
                         ),
                         SizedBox(width: 12),
