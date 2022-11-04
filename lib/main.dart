@@ -22,7 +22,7 @@ void main() async {
     onPrimary: Color.fromARGB(255, 255, 253, 237),
     onSecondary: Color(0xff000000),
     onSurface: Color.fromARGB(255, 52, 49, 45),
-    onBackground: Color.fromARGB(255, 255, 253, 237),
+    onBackground: Color.fromARGB(255, 255, 255, 255),
     onError: Color(0xff000000),
     brightness: Brightness.light,
   );

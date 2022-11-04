@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 2),  
+                    SizedBox(height: 2),
                     AppTextField(
                       hint: "Email",
                       icon: Icons.email,
